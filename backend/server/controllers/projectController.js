@@ -1,9 +1,9 @@
-import Project from "../models/projectModel";
+const Project = require('../models/projectModel');
 
 const getAllProjects = async (req, res) => {
   try {
     const projects = await Project.find();
-    
+
     res.status(200).json({
       status: "success",
       results: projects.length,
@@ -19,7 +19,7 @@ const getAllProjects = async (req, res) => {
 
 const createNewProject = async (req,res)=> {
     try {
-        const newProject = Project.create({
+        const newProject = await Project.create({
             title: req.body.title,
             description: req.body.description,
             createdAt: req.body.createdAt
@@ -114,6 +114,7 @@ const deleteProject = async (req, res) => {
       status: "success",
       data: null
     });
+    
   } catch (error) {
     res.status(500).json({
       status: "error",

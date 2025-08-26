@@ -10,6 +10,6 @@ router.route("/")
 router.route("/:id")
     .get(projectController.getProjectByID)
     .delete(projectController.deleteProject)
-    .patch(projectController.updateProject);
+    .put(projectController.updateProject);
 
 module.exports = router;
