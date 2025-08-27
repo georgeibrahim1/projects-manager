@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import NavBar from "../ui/navbar";
 
 export default function MainLayout() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
   const navigate = useNavigate();
 
+  const token = localStorage.getItem("token");
+  const isLoggedIn = !!token;
+
   const handleSignOut = () => {
-    setIsLoggedIn(false);
-    // clear token/localStorage if needed
+    localStorage.removeItem("token");
     navigate("/login");
   };
 
@@ -17,18 +19,16 @@ export default function MainLayout() {
       <NavBar>
         {!isLoggedIn ? (
           <>
-            <Link
-              to="/login"
-              className="hover:underline px-2"
-            >
-              Log in
-            </Link>
-            <Link
-              to="/signup"
-              className="hover:underline px-2"
-            >
-              Sign up
-            </Link>
+            {location.pathname !== "/login" && (
+              <Link to="/login" className="hover:underline px-2">
+                Log in
+              </Link>
+            )}
+            {location.pathname !== "/signup" && (
+              <Link to="/signup" className="hover:underline px-2">
+                Sign up
+              </Link>
+            )}
           </>
         ) : (
           <button

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../ui/logo";
 import Form from "../ui/form";
 
-export default function LogInPage() {
+export default function LogInPage({}) {
   const navigate = useNavigate();
   const [error, setError] = useState({ status: false, message: "" });
 
