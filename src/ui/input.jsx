@@ -1,4 +1,4 @@
-export default function input({ isLabel, labelText, id, type = "text", value, onChange, placeholder }) {
+export default function Input({ isLabel, labelText, id, type = "text", value, onChange, placeholder }) {
     return (
             <div className="flex flex-col w-full mb-4">
                 {isLabel && (

@@ -12,6 +12,7 @@ export default function Form({ fields, onSubmit, buttonText , error}) {
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
+
   };
 
   const handleSubmit = (e) => {
@@ -26,7 +27,7 @@ export default function Form({ fields, onSubmit, buttonText , error}) {
           key={field.id}
           id={field.id}
           type={field.type}
-          value={formData[field.id]}
+          value={formData[field.id] || ""}
           onChange={handleChange}
           placeholder={field.placeholder}
           isLabel={field.isLabel}

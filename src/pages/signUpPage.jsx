@@ -7,13 +7,29 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const [error, setError] = useState({ status: false, message: "" });
 
-  const handleSubmit = (data) => {
-    if (!data.username || !data.password) {
+  const handleSubmit = async (formData) => {
+    if (!formData.username || !formData.password) {
       setError({ status: true, message: "All fields are required!" });
       return;
     }
 
-    navigate("/login");
+    try {
+      const res = await fetch("http://localhost:3000/api/auth/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        navigate("/projects");
+      } else {
+        setError({ status: true, message: data.message || "Signup failed" });
+      }
+    } catch (err) {
+      setError({ status: true, message: "Server error" });
+    }
   };
 
   return (
@@ -26,11 +42,18 @@ export default function SignUpPage() {
         <Form
           fields={[
             {
-              id: "username",
+              id: "name",
               type: "text",
               isLabel: true,
-              labelText: "User Name",
+              labelText: "Name",
               placeholder: "Enter your name",
+            },
+            {
+              id: "email",
+              type: "email",
+              isLabel: true,
+              labelText: "E-Mail",
+              placeholder: "Enter your email",
             },
             {
               id: "password",
@@ -48,4 +71,3 @@ export default function SignUpPage() {
     </div>
   );
 }
-
