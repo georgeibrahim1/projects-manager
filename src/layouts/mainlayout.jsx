@@ -9,6 +9,7 @@ export default function MainLayout() {
         {/*add here links*/}
     </NavBar>
     <div>
+        {/*edit page layout here*/}
         <Outlet/>
     </div>
     </>

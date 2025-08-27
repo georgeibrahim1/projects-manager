@@ -1,9 +1,10 @@
 import React from 'react'
+import Logo from './logo'
 
 export default function NavBar({children}) {
   return (
     <div>
-        <div>Logo</div>
+        <Logo/>
         <div>
             {children}
         </div>
