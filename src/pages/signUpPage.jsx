@@ -8,7 +8,7 @@ export default function SignUpPage() {
   const [error, setError] = useState({ status: false, message: "" });
 
   const handleSubmit = async (formData) => {
-    if (!formData.username || !formData.password) {
+    if (!formData.name || !formData.password || !formData.email) {
       setError({ status: true, message: "All fields are required!" });
       return;
     }
