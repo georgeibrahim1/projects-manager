@@ -3,6 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import Button from "../ui/button";
 import Form from "../ui/form";
 import TaskCard from "../ui/taskCard";
+import LoadingSpinner from "../ui/loadingSpinner";
 
 export default function TasksPage() {
   const { id: projectId } = useParams();
@@ -130,7 +131,7 @@ export default function TasksPage() {
     }
   };
 
-  if (loading) return <p>Loading tasks...</p>;
+  if (loading) return <LoadingSpinner/>;
 
   return (
     <div className="p-4">

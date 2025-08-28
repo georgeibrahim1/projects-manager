@@ -3,6 +3,7 @@ import ProjectCard from "../ui/projectCard";
 import Button from "../ui/button";
 import Form from "../ui/form";
 import { useNavigate } from "react-router-dom";
+import LoadingSpinner from "../ui/loadingSpinner";
 
 export default function ProjectList() {
 
@@ -91,7 +92,7 @@ export default function ProjectList() {
   };
 
   if (loading) {
-    return <div className="p-6">Loading projects...</div>;
+    return <LoadingSpinner/>;
   }
 
   return (
