@@ -85,8 +85,8 @@ export default function ProjectList() {
     }
   };
 
-  const handleShowTasks = (projectId)=> {
-    navigate(`/project/${projectId}`);
+  const handleShowTasks = (project)=> {
+    navigate(`/project/${project._id}`);
   };
 
   if (loading) {
@@ -151,7 +151,7 @@ export default function ProjectList() {
               description={project.description}
               date={new Date(project.createdAt).toLocaleDateString()}
               onDelete={() => handleDelete(project._id)}
-              onShowTasks={() => handleShowTasks(project._id)}
+              onShowTasks={() => handleShowTasks(project)}
             />
           ))}
         </div>

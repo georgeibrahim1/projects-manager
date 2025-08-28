@@ -2,7 +2,7 @@ const Task = require("../models/taskModel");
 
 const getAllTasks = async (req, res) => {
   try {
-    const tasks = await Task.find();
+    const tasks = await Task.find({ projectId: req.params.id });
 
     res.status(200).json({
       status: "success",
@@ -27,7 +27,7 @@ const createNewTask = async (req, res) => {
 
     res.status(201).json({
       status: "success",
-      data: { newTask }
+      data: { task: newTask }
     });
   } catch (error) {
     res.status(400).json({
@@ -39,7 +39,7 @@ const createNewTask = async (req, res) => {
 
 const getTaskByID = async (req, res) => {
   try {
-    const task = await Task.findById(req.params.id).populate("projectId");
+    const task = await Task.findById(req.params.id);
 
     if (!task) {
       return res.status(404).json({

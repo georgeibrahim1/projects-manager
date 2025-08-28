@@ -5,7 +5,7 @@ import LogInPage from './pages/logInPage'
 import SignUpPage from './pages/signUpPage'
 import ProjectsList from './pages/projects-list'
 import ProtectedRoute from './features/authentication/protectedRoute'
-import ProjectPage from './pages/projectPage'
+import TasksPage from './pages/tasksPage'
 
 export default function App() {
   return (
@@ -20,7 +20,7 @@ export default function App() {
       }/>
       <Route path="/project/:id" element={
         <ProtectedRoute>
-          <ProjectPage/>
+          <TasksPage/>
         </ProtectedRoute>
       }/>
     </Route>
