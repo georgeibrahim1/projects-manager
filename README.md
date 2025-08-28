@@ -1,12 +1,65 @@
-# React + Vite
+# Project Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A simple Project Manager web app built with **React (frontend)** and **Node.js/Express (backend)**.  
+It lets you create projects, add tasks, update their status, and manage everything in one place.  
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- Create, edit, and delete projects
+- Add and manage tasks for each project
+- Update task status (e.g., Todo → In Progress → Done)
+- Authentication with JWT
+- Responsive UI built with TailwindCSS
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ How to use the website locally
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/georgeibrahim1/projects-manager
+cd projects-manager
+```
+
+### 2. Backend Setup
+```bash
+cd backend/server
+npm install
+```
+
+Run backend server:
+```bash
+npm run dev
+```
+
+> The backend should now be running at `http://localhost:3000`
+
+---
+
+### 3. Frontend Setup
+```bash
+cd projects-manager
+npm install
+```
+
+Start the React app:
+```bash
+npm run dev
+```
+
+> The frontend will run at `http://localhost:5173` (Vite default)  
+> or `http://localhost:3000` if using CRA.
+
+---
+
+## 🔧 Tech Stack
+- **Frontend:** React, TailwindCSS, Vite  
+- **Backend:** Node.js, Express.js, MongoDB  
+- **Auth:** JWT
+> ⚠️ Note: Passwords are stored in plain text. For security reasons, use only dummy/fake passwords when testing this project.
+
+---
+
+## 📜 License
+MIT  
