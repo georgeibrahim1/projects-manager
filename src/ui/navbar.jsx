@@ -1,13 +1,14 @@
-import React from 'react'
-import Logo from './logo'
+import Logo from "../ui/logo";
 
-export default function NavBar({children}) {
+export default function NavBar({ children }) {
   return (
-    <div>
-        <Logo/>
-        <div>
-            {children}
-        </div>
+    <div className="flex items-center justify-between px-6 py-4 bg-gray-100 shadow-md">
+      <div>
+        <Logo />
+      </div>
+      <div className="flex gap-4">
+        {children}
+      </div>
     </div>
-  )
+  );
 }

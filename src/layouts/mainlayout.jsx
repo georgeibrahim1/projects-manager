@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Link, useNavigate, useLocation } from "react-router-dom";
 import NavBar from "../ui/navbar";
+import Logo from "../ui/logo";
 
 export default function MainLayout() {
   const location = useLocation();

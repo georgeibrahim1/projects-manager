@@ -53,7 +53,10 @@ const getProjectByID = async (req, res) => {
 
     res.status(200).json({
       status: "success",
-      data: project
+      data: {
+        project: project
+      }
+
     });
   } catch (error) {
     res.status(500).json({

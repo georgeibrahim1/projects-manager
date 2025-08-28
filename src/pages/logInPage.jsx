@@ -34,11 +34,7 @@ export default function LogInPage({}) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gray-100 p-4">
-      <div className="mb-6">
-        <Logo />
-      </div>
-
+    <div className="flex h-[30rem] flex-col items-center justify-center bg-gray-100 p-4">
       <div className="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
         <Form
           fields={[

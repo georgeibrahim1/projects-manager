@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import Button from "../ui/button";
 import Form from "../ui/form";
 import TaskCard from "../ui/taskCard";
 
 export default function TasksPage() {
   const { id: projectId } = useParams();
+  const navigate = useNavigate();
+
+  const [projectTitle, setProjectTitle] = useState(null);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
   const [isOpenAddForm, setIsOpenAddForm] = useState(false);
@@ -35,8 +38,32 @@ export default function TasksPage() {
       }
     };
 
-    if (projectId) fetchTasks();
-  }, [projectId]);
+    const fetchProject = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:3000/api/projects/${projectId}`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        const data = await res.json();
+
+        if (res.ok) {
+          setProjectTitle(data.data.project.title);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchTasks();
+    fetchProject();
+  }, [projectId, token]);
 
   const handleAddTask = async (formData) => {
     try {
@@ -48,6 +75,7 @@ export default function TasksPage() {
         },
         body: JSON.stringify({ ...formData, projectId }),
       });
+      
       const data = await res.json();
 
       if (res.ok) {
@@ -71,6 +99,7 @@ export default function TasksPage() {
           Authorization: `Bearer ${token}`,
         },
       });
+
       if (res.ok) {
         setTasks((prev) => prev.filter((task) => task._id !== taskId));
       }
@@ -105,14 +134,25 @@ export default function TasksPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-semibold mb-4">Tasks for Project {projectId}</h1>
+      <div className="flex items-center justify-between mb-4">
+        <h1 className="text-2xl font-semibold">
+          Tasks for Project <span className="text-3xl text-blue-600 font-bold">{projectTitle ? projectTitle : "Loading..."}</span>
+        </h1>
+        <div className="px-5" >
+          <Button onClick={() => navigate("/projects")} variant="back">
+            ← Back to Projects
+          </Button>
+        </div>
+      </div>
 
-      <Button onClick={() => setIsOpenAddForm(true)} variant="baseV">
-        + Add Task
-      </Button>
+      <div>
+        <Button onClick={() => setIsOpenAddForm(true)} variant="add">
+          + Add Task
+        </Button>
+      </div>
 
       {isOpenAddForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
           <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative">
             <button
               onClick={() => setIsOpenAddForm(false)}
@@ -121,7 +161,9 @@ export default function TasksPage() {
               ✕
             </button>
 
-            <h2 className="text-xl font-semibold mb-4 text-center">Add New Task</h2>
+            <h2 className="text-xl font-semibold mb-4 text-center">
+              Add New Task
+            </h2>
 
             <Form
               fields={[
@@ -130,12 +172,6 @@ export default function TasksPage() {
                   isLabel: true,
                   labelText: "Title",
                   placeholder: "Enter task title",
-                },
-                {
-                  id: "status",
-                  isLabel: true,
-                  labelText: "Status",
-                  placeholder: "Enter task status",
                 },
               ]}
               onSubmit={handleAddTask}

@@ -5,7 +5,9 @@ export default function Button({ type = "button", children, onClick, variant = "
 
   const variants = {
     baseV: "bg-blue-600 text-white hover:bg-blue-700",
-    form: "w-full bg-blue-600 text-white py-2 hover:bg-blue-700 rounded-lg" 
+    form: "w-full bg-blue-600 text-white py-2 hover:bg-blue-700 rounded-lg" ,
+    back: "bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300",
+    add: "px-[100px] bg-blue-600 text-white py-2 hover:bg-blue-700 rounded-lg",
   };
 
   return (
